@@ -32,5 +32,5 @@ jobs:
           username: ubuntu
           hosts: ${{ secrets.HOST }}
           privateKey: ${{ secrets.DOCKER_SSH_PRIVATE_KEY}}
-          command: sudo docker service update --image  vinodn13/python_flask:latest python_new
+          command: docker service update --image  vinodn13/python_flask:latest python_new
           
