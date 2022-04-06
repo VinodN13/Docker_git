@@ -4,6 +4,8 @@ on: push
 jobs:
   docker:
     runs-on: ubuntu-latest
+    env: 
+      SHA: ${GITHUB_SHA}
     steps:
       -
         name: Set up QEMU
@@ -22,12 +24,12 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: vinodn13/python_flask:${{GITHUB_SHA}}
+          tags: vinodn13/python_flask:latest
           
       - name: EXECUTE DOCKER COMMAND 
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: docker service update --replica=2 vinodn13/python_flask:${{GITHUB_SHA}}
-          host: ${{ secrets.HOST }}
-          username: ubuntu
-          privateKey: ${{ secrets.DOCKER_SSH_PRIVATE_KEY}}
+          host: ${{ secrets.HOST }} 
+          username: ubuntu 
+          privateKey: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }} 
+          command: sudo docker service update --replicas 1 --image vinodn13/python_flask:latest py_new
