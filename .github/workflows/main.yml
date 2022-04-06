@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: vinodn13/python_flask:latest
+          tags: vinodn13/python_flask:${GITHUB_SHA}
           
       - name: EXECUTE DOCKER COMMAND 
         uses: garygrossgarten/github-action-ssh@release
@@ -32,5 +32,5 @@ jobs:
           host: ${{ secrets.HOST }} 
           username: ubuntu 
           privateKey: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }} 
-          command: sudo docker service update --replicas 2 --image vinodn13/python_flask:latest py_new
+          command: sudo docker service update --replicas 2 --image vinodn13/python_flask:${GITHUB_SHA} py_new
 
