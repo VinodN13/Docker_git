@@ -27,8 +27,8 @@ jobs:
           tags: vinodn13/python_flask:latest
           
       - name: EXECUTE DOCKER COMMAND 
-        uses: JimCronqvist/action-ssh@master
+        uses: sagebind/docker-swarm-deploy-action@v2
         with:
-          hosts: 'ubuntu@${{ secrets.HOST }}'
+          remote_host: ssh://ubuntu@${{HOST}}
           privateKey: ${{ secrets.DOCKER_SSH_PRIVATE_KEY}}
-          command: docker service update --replicas 1 --image vinodn13/python_flask:latest py_new
+          command: docker service update --replicas 2 --image vinodn13/python_flask:latest py_new
